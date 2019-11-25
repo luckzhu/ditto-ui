@@ -1,4 +1,4 @@
-# alchemy-ui
+# ditto-ui
 
 ## Project setup
 ```
