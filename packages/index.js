@@ -1,6 +1,6 @@
-import XrTest from "./test";
+import DtButton from "./button";
 // 所有组件列表
-const components = [XrTest];
+const components = [DtButton];
 // 定义 install 方法，接收 Vue 作为参数
 const install = function(Vue) {
   // 判断是否安装，安装过就不继续往下执行
