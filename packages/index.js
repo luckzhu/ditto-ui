@@ -1,6 +1,7 @@
 import DtButton from "./button";
+import DtIcon from "./icon";
 // 所有组件列表
-const components = [DtButton];
+const components = [DtButton, DtIcon];
 // 定义 install 方法，接收 Vue 作为参数
 const install = function(Vue) {
   // 判断是否安装，安装过就不继续往下执行

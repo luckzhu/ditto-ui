@@ -15,7 +15,7 @@
   ]"
     @click="handleClick()"
   >
-  
+    <dt-icon :name="icon" v-if="icon"></dt-icon>
     <span>
       <slot></slot>
     </span>
@@ -125,6 +125,17 @@ export default {
 }
 
 .dt-button-circle {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  // font-size: 16px;
   border-radius: 50%;
+  .svg-icon {
+    margin-right: 0;
+  }
+}
+
+.svg-icon {
+  margin-right: 4px;
 }
 </style>
