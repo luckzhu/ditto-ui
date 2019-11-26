@@ -4,9 +4,10 @@
     :disabled="disabled || isLoading"
     :type="htmlType"
     :class="[
-    type ? 'dt-button-' + type : '',
-    size ? 'dt-button-' + size : '',
-    shape ? 'dt-button-' + shape : '',
+    type ? `dt-button-${type}` : '',
+    size ? `dt-button-${size}` : '',
+    shape ? `dt-button-${shape}` : '',
+    iconPosition ? `dt-button-${iconPosition}` :'',
     {
       'is-loading': isLoading,
       'is-disabled': disabled,
@@ -17,7 +18,7 @@
   >
     <dt-icon :name="icon" v-if="icon && !isLoading"></dt-icon>
     <dt-icon name="loading" class="loading" v-if="isLoading"></dt-icon>
-    <span v-if="$slots.default">
+    <span v-if="$slots.default" class="button-content">
       <slot></slot>
     </span>
   </button>
@@ -37,6 +38,13 @@ export default {
     },
     ghost: Boolean,
     icon: String,
+    iconPosition: {
+      type: String,
+      default: "left",
+      validator(value) {
+        return ["left", "right"].indexOf(value) !== -1;
+      }
+    },
     size: String,
     loading: {
       type: [Boolean, Object],
@@ -147,19 +155,7 @@ export default {
     border-color: #cf1322;
   }
 }
-.svg-icon {
-  margin-right: 4px;
-}
-.dt-button-circle {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  // font-size: 16px;
-  border-radius: 50%;
-  .svg-icon {
-    margin-right: 0;
-  }
-}
+
 .is-loading {
   pointer-events: none;
 }
@@ -173,5 +169,41 @@ export default {
   100% {
     transform: rotate(360deg);
   }
+}
+.dt-button-right {
+  display: flex;
+  align-items: center;
+  .svg-icon {
+    order: 2;
+    margin-left: 4px;
+  }
+  .button-content {
+    order: 1;
+  }
+}
+.dt-button-left {
+  display: flex;
+  align-items: center;
+  .svg-icon {
+    order: 1;
+    margin-right: 4px;
+  }
+  .button-content {
+    order: 21;
+  }
+}
+.dt-button-circle {
+  display: block;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  .svg-icon {
+    margin: 0;
+  }
+}
+.dt-button-round {
+  padding: 0 16px;
+  border-radius: 32px;
 }
 </style>
