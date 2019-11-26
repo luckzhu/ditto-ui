@@ -1,22 +1,23 @@
 <template>
   <button
     class="dt-button"
-    :disabled="disabled || loading"
+    :disabled="disabled || isLoading"
     :type="htmlType"
     :class="[
     type ? 'dt-button-' + type : '',
     size ? 'dt-button-' + size : '',
     shape ? 'dt-button-' + shape : '',
     {
-      'is-loading': loading,
+      'is-loading': isLoading,
       'is-disabled': disabled,
       'is-ghost': ghost
     }
-  ]"
+    ]"
     @click="handleClick()"
   >
-    <dt-icon :name="icon" v-if="icon"></dt-icon>
-    <span>
+    <dt-icon :name="icon" v-if="icon && !isLoading"></dt-icon>
+    <dt-icon name="loading" class="loading" v-if="isLoading"></dt-icon>
+    <span v-if="$slots.default">
       <slot></slot>
     </span>
   </button>
@@ -38,7 +39,7 @@ export default {
     icon: String,
     size: String,
     loading: {
-      type: [Boolean, Number],
+      type: [Boolean, Object],
       default: false
     },
     disabled: {
@@ -47,9 +48,26 @@ export default {
     },
     htmlType: String
   },
+  data() {
+    return {
+      isLoading: false
+    };
+  },
+  computed: {},
+  mounted() {
+    const { loading } = this;
+    this.isLoading = loading && !loading.delay;
+  },
   methods: {
-    handleClick(e) {
-      this.$emit("click", e);
+    handleClick() {
+      if (this.loading.delay) {
+        const { delay } = this.loading;
+        setTimeout(() => {
+          this.isLoading = true;
+        }, delay);
+        console.log(this.loading);
+      }
+      // this.$emit("click", e);
     }
   }
 };
@@ -76,7 +94,8 @@ export default {
   outline: 0;
   //链接伪类先后顺序:link — :visited — :hover — :active
   &:hover,
-  &:focus {
+  &:focus,
+  &.is-loading {
     color: #40a9ff;
     border-color: #40a9ff;
   }
@@ -95,7 +114,8 @@ export default {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
   &:hover,
-  &:focus {
+  &:focus,
+  &.is-loading {
     color: #fff;
     background-color: #40a9ff;
     border-color: #40a9ff;
@@ -108,14 +128,18 @@ export default {
 }
 
 .dt-button-danger {
-  color: #f5222d;
-  background-color: #f5f5f5;
-  border-color: #d9d9d9;
+  color: #fff;
+  background-color: #ff4d4f;
+  border-color: #ff4d4f;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+
   &:hover,
-  &:focus {
+  &:focus,
+  &.is-loading {
     color: #fff;
-    background-color: #ff4d4f;
-    border-color: #ff4d4f;
+    background-color: #ff7875;
+    border-color: #ff7875;
   }
   &:active {
     color: #fff;
@@ -123,7 +147,9 @@ export default {
     border-color: #cf1322;
   }
 }
-
+.svg-icon {
+  margin-right: 4px;
+}
 .dt-button-circle {
   width: 32px;
   height: 32px;
@@ -134,8 +160,18 @@ export default {
     margin-right: 0;
   }
 }
-
-.svg-icon {
-  margin-right: 4px;
+.is-loading {
+  pointer-events: none;
+}
+.loading {
+  animation: rotate 2s linear infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
