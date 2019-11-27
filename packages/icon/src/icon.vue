@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import "./icon.js";
+import "./svg.js";
 export default {
   name: "DtIcon",
   props: {
