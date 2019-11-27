@@ -41,13 +41,14 @@ export default {
     iconPosition: {
       type: String,
       default: "left",
+      //验证 iconPosition 的值只能是left或right中一个
       validator(value) {
         return ["left", "right"].indexOf(value) !== -1;
       }
     },
     size: String,
     loading: {
-      type: [Boolean, Object],
+      type: [Boolean, Object], //表示loading既可以是布尔值，也可以是对象
       default: false
     },
     disabled: {
@@ -189,7 +190,7 @@ export default {
     margin-right: 4px;
   }
   .button-content {
-    order: 21;
+    order: 2;
   }
 }
 .dt-button-circle {
