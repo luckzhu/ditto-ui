@@ -1,17 +1,26 @@
 <template>
   <div>
     <div class="box">
-      <dt-button>按钮</dt-button>
-      <dt-button type="primary">按钮</dt-button>
-      <dt-button type="danger">按钮</dt-button>
-    </div>
-    <div class="box">
-      <dt-button shape="circle" type="primary" icon="search"></dt-button>
-      <dt-button type="primary" icon="search">按钮</dt-button>
-      <dt-button type="primary" shape="round" icon="search">按钮</dt-button>
-      <dt-button type="primary" icon="search" iconPosition="right">按钮</dt-button>
-      <dt-button type="danger" icon="search" loading>加载中</dt-button>
-      <dt-button type="danger" icon="search" :loading="{'delay':500}">点击延迟0.5s</dt-button>
+      <dt-row :gutter="16">
+        <dt-col :span="12">
+          <div class="grid-content">1</div>
+        </dt-col>
+        <dt-col :span="12">
+          <div class="grid-content">2</div>
+        </dt-col>
+      </dt-row>
+
+      <dt-row type="flex" :gutter="16" align="middle">
+        <dt-col :span="8">
+          <div class="grid-content">1</div>
+        </dt-col>
+        <dt-col :span="8">
+          <div class="grid-content">2</div>
+        </dt-col>
+        <dt-col :span="8">
+          <div class="grid-content">3</div>
+        </dt-col>
+      </dt-row>
     </div>
   </div>
 </template>
@@ -24,10 +33,14 @@ export default {
 
 <style lang="scss" scoped>
 .box {
-  display: flex;
   padding: 20px;
-  * {
-    margin-right: 20px;
-  }
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+}
+.dt-row {
+  margin-bottom: 20px;
+}
+.grid-content {
+  background: #ccc;
+  height: 35px;
 }
 </style>
