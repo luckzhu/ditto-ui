@@ -25,7 +25,9 @@
 </template>
 
 <script>
+import DtIcon from "../../icon/src/icon";
 export default {
+  components: { DtIcon },
   name: "DtButton",
   props: {
     type: {
@@ -68,15 +70,14 @@ export default {
     this.isLoading = loading && !loading.delay;
   },
   methods: {
-    handleClick() {
+    handleClick(e) {
       if (this.loading.delay) {
         const { delay } = this.loading;
         setTimeout(() => {
           this.isLoading = true;
         }, delay);
-        console.log(this.loading);
       }
-      // this.$emit("click", e);
+      this.$emit("click", e);
     }
   }
 };
