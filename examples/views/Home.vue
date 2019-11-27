@@ -22,6 +22,9 @@
         </dt-col>
       </dt-row>
     </div>
+    <div class="box">
+      <dt-button icon="setting"></dt-button>
+    </div>
   </div>
 </template>
 
