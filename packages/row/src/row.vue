@@ -13,7 +13,6 @@ export default {
     //布局模式，可选 flex
     type: {
       type: String,
-      default: "flex"
     },
     //flex 布局下的垂直对齐方式：top middle bottom
     align: {
@@ -34,7 +33,6 @@ export default {
         gap.marginLeft = `-${gutter / 2}px`;
         gap.marginRight = gap.marginLeft;
       }
-      console.log(gap);
       return gap;
     }
   },
